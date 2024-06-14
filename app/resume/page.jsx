@@ -6,7 +6,7 @@ import {
   FaJs,
   FaReact,
   FaFigma,
-  FaNodeJs,
+  FaNodeJs, 
 } from "react-icons/fa";
 
 import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
@@ -15,39 +15,31 @@ import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
 const about = {
   title: "About me",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
   info: [
     {
       fieldName: "Name",
-      fieldValue: "Luke Coleman",
+      fieldValue: "Mathieu Schmitt",
     },
     {
       fieldName: "Phone",
-      fieldValue: "(+40) 321 654 678",
+      fieldValue: "07 68 56 13 38",
     },
     {
       fieldName: "Experience",
-      fieldValue: "12+ Years",
-    },
-    {
-      fieldName: "Skype",
-      fieldValue: "luke.01",
+      fieldValue: "1 an",
     },
     {
       fieldName: "Nationality",
-      fieldValue: "American",
+      fieldValue: "Française",
     },
     {
       fieldName: "Email",
-      fieldValue: "luke.01@gmail.com",
-    },
-    {
-      fieldName: "Freelance",
-      fieldValue: "Available",
+      fieldValue: "mathieu.schmitt13@icloud.com",
     },
     {
       fieldName: "Languages",
-      fieldValue: "English, Spanish",
+      fieldValue: "Français, Anglais",
     },
   ],
 };
@@ -57,37 +49,22 @@ const experience = {
   icon: "/assets/resume/badge.svg",
   title: "My experience",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
   items: [
     {
-      company: "Tech Solutions Inc.",
-      position: "Full Stack Developer",
-      duration: "2022 - Present",
+      company: "Simplon",
+      position: "Développeur web fullstack junior",
+      duration: "2023 - Present",
     },
     {
-      company: "Web Design Studio",
-      position: "Front-End Developer Intern",
-      duration: "Summer 2021",
+      company: "Simplon",
+      position: "Create a figma website ",
+      duration: "2023 - Present",
     },
     {
-      company: "E-commerce Startup",
-      position: "Freelance Web Developer",
-      duration: "2020 - 2021",
-    },
-    {
-      company: "Tech Academy",
-      position: "Teaching Assistant",
-      duration: "2019 - 2020",
-    },
-    {
-      company: "Digital Agency",
-      position: "UI/UX Designer",
-      duration: "2018 - 2019",
-    },
-    {
-      company: "Software Development Firm",
-      position: "Junior Developer",
-      duration: "2017 - 2018",
+      company: "Move Expert",
+      position: "Manage administratif operation",
+      duration: "2019 - 2022",
     },
   ],
 };
@@ -100,35 +77,21 @@ const education = {
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
   items: [
     {
-      institution: "Online Course Platform",
-      degree: "Full Stack Web Development Bootcamp",
-      duration: "2023",
+      institution: "Simplon.co",
+      degree: "Full Stack Web Development website",
+      duration: "2023 - 2024",
     },
     {
-      institution: "Codecademy",
-      degree: "Front-end Track",
-      duration: "2022",
+      institution: "Lycee Sainte marie ",
+      degree: "BTS Transport et prestations logistiques",
+      duration: "2019 - 2022",
     },
     {
-      institution: "Online Course",
-      degree: "Programming Course",
-      duration: "2020 - 2021",
+      institution: "Lycee Sainte marie ",
+      degree: "Bac Gestion Administration",
+      duration: "2015 - 2019",
     },
-    {
-      institution: "Tech Institute",
-      degree: "Certified Web Developer",
-      duration: "2019",
-    },
-    {
-      institution: "Design School",
-      degree: "Diploma in Graphic Design",
-      duration: "2016 - 2018",
-    },
-    {
-      institution: "Community College",
-      degree: "Associate Degree in Computer Science",
-      duration: "2014 - 2016",
-    },
+  
   ],
 };
 
@@ -164,7 +127,7 @@ const skills = {
     },
     {
       icon: <FaNodeJs />,
-      name: "node.js",
+      name: "node.js ( en cours d'apprentissage )",
     },
     {
       icon: <FaFigma />,

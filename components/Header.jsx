@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button"; // Correction du chemin d'importation pour Button
 
 // components
-import Nav from "./Nav";
-import MobileNav from "./MobileNav";
+import Nav from "@/components/Nav"; // Correction du chemin d'importation pour Nav
+import MobileNav from "@/components/MobileNav"; // Correction du chemin d'importation pour MobileNav
 
 const Header = () => {
   return (
@@ -12,19 +12,19 @@ const Header = () => {
         {/* logo */}
         <Link href="/">
           <h1 className="text-4xl font-semibold">
-            Luke<span className="text-accent">.</span>
+            Mathieu<span className="text-accent"></span>
           </h1>
         </Link>
 
-        {/* desktop nav & hire me button */}
+        {/* navigation pour desktop et bouton 'Hire me' */}
         <div className="hidden xl:flex items-center gap-8">
           <Nav />
           <Link href="/contact">
-            <Button>Hire me</Button>
+            <Button>Me contacter</Button>
           </Link>
         </div>
 
-        {/* mobile nav */}
+        {/* navigation pour mobile */}
         <div className="xl:hidden">
           <MobileNav />
         </div>

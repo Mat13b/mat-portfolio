@@ -25,7 +25,7 @@ const projects = [
     category: "frontend",
     title: "project 1",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
+      "Développement de site web ",
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
     image: "/assets/work/thumb1.png",
     live: "",
@@ -36,7 +36,7 @@ const projects = [
     category: "fullstack",
     title: "project 2",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
+      "Création d'un site web pour mon projet de fin de formation",
     stack: [{ name: "Next.js" }, { name: "Tailwind.css" }, { name: "Node.js" }],
     image: "/assets/work/thumb2.png",
     live: "",
@@ -47,7 +47,7 @@ const projects = [
     category: "frontend",
     title: "project 3",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate magnam modi.",
+      "Mes projets personnels",
     stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
     image: "/assets/work/thumb3.png",
     live: "",
