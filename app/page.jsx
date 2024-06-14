@@ -16,7 +16,7 @@ const Home = () => {
               Hello i'm <br /> <span className="text-accent">Mathieu Schmitt</span>
             </h1>
             <p className="max-w-[500px] mb-9 text-white/80">
-            Je suis un développeur web passionné par la programmation et le design. J'aime créer des sites web
+            Je suis un développeur web passionné par la programmation et le design. J&apos;aime créer des sites web
          qui sont à la fois beaux et fonctionnels. Je suis toujours à la recherche de nouveaux défis et de
          nouvelles technologies à apprendre
             </p>
