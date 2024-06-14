@@ -20,7 +20,7 @@ const info = [
   {
     icon: <FaPhoneAlt />,
     title: "Phone",
-    description: "07 68 56 1338 ",
+    description: "07 68 56 1338",
   },
   {
     icon: <FaEnvelope />,
@@ -37,6 +37,15 @@ const info = [
 import { motion } from "framer-motion";
 
 const Contact = () => {
+  const validateInput = (type, value) => {
+    const regexPatterns = {
+      email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+      phone: /^\+?\d{10,15}$/,
+      text: /^[a-zA-Z\s]*$/,
+    };
+    return value ? regexPatterns[type].test(value) : false;
+  };
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -53,15 +62,15 @@ const Contact = () => {
             <form className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl">
               <h3 className="text-4xl text-accent">Let's work together</h3>
               <p className="text-white/60">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eum
-                nihil sapiente pariatur id totam.
+                Veuillez me contacter pour tout vos sites web que ce soit du front end ainsi que le back end <br />
+                je suis destiné à vos besoin en tant que developpeur web fullstack 
               </p>
               {/* input */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Input type="firstname" placeholder="Firstname" />
-                <Input type="lastname" placeholder="Lastname" />
-                <Input type="email" placeholder="Email address" />
-                <Input type="phone" placeholder="Phone number" />
+                <Input type="text" placeholder="Prénom" validate={(value) => validateInput('text', value)} />
+                <Input type="text" placeholder="Nom" validate={(value) => validateInput('text', value)} />
+                <Input type="email" placeholder="Adresse email" validate={(value) => validateInput('email', value)} />
+                <Input type="tel" placeholder="Numéro de téléphone" validate={(value) => validateInput('phone', value)} />
               </div>
               {/* select */}
               <Select>

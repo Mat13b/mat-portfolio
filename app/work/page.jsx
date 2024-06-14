@@ -27,9 +27,9 @@ const projects = [
     description:
       "Développement de site web ",
     stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
-    image: "/assets/work/thumb1.png",
-    live: "",
-    github: "",
+    image: "/assets/127.0.0.1_5501_index.html(1_Desktop).png",
+    live: "https://ez-bike-beta.vercel.app/",
+    github: "https://github.com/KD63799/EZ_Bike ",
   },
   {
     num: "02",
@@ -38,7 +38,7 @@ const projects = [
     description:
       "Création d'un site web pour mon projet de fin de formation",
     stack: [{ name: "Next.js" }, { name: "Tailwind.css" }, { name: "Node.js" }],
-    image: "/assets/work/thumb2.png",
+    image: "",
     live: "",
     github: "",
   },
@@ -49,7 +49,29 @@ const projects = [
     description:
       "Mes projets personnels",
     stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
-    image: "/assets/work/thumb3.png",
+    image: "/assets/Capture d’écran 2024-06-14 à 23.52.19.png",
+    live: "",
+    github: "https://github.com/Mat13b/Formul-air",
+  },
+  {
+    num: "04",
+    category: "frontend",
+    title: "project 4",
+    description:
+      "Projet de démonstration",
+    stack: [{ name: "React" }, { name: "CSS" }],
+    image: "",
+    live: "",
+    github: "https://github.com/jlaron230/ProjetX",
+  },
+  {
+    num: "05",
+    category: "fullstack",
+    title: "project 5",
+    description:
+      "Projet de démonstration",
+    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
+    image: "/assets/work/Capture d’écran 2024-06-14 à 23.07.38.png",
     live: "",
     github: "",
   },
