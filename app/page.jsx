@@ -1,37 +1,25 @@
-
-
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-
 
 const Home = () => {
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">
-        <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
-          {/* text */}
-          <div className="text-center xl:text-left order-2 xl:order-none">
-            <span className="text-xl">Software Developer</span>
-            <h1 className="h1 mb-6">
-              Helloi&apos;m <br /> <span className="text-accent">Mathieu Schmitt</span>
+        <div className="flex flex-col xl:flex-row items-center justify-between xl:py-8">
+          <div className="text-center xl:text-left xl:w-1/2">
+            <span className="text-xl font-medium">Développeur Web</span>
+            <h1 className="text-4xl xl:text-5xl font-bold mb-4">
+              Bonjour, je suis <br /> <span className="text-accent">Mathieu Schmitt</span>
             </h1>
-            <p className="max-w-[500px] mb-9 text-white/80">
-            Je suis un développeur web passionné par la programmation et le design. J&apos;aime créer des sites web
-         qui sont à la fois beaux et fonctionnels. Je suis toujours à la recherche de nouveaux défis et de
-         nouvelles technologies à apprendre
+            <p className="max-w-[500px] mb-6 text-white/80">
+              Passionné par la programmation et le design, je crée des sites web alliant esthétique et fonctionnalité. Toujours en quête de nouveaux défis et technologies à maîtriser.
             </p>
-            {/* btn and socials */}
-            <div className="flex flex-col xl:flex-row items-center gap-8">
-              <div className="mb-8 xl:mb-0">
-                <Social
-                  containerStyles="flex gap-6"
-                  iconStyles="w-9 h-9 border border-accent rounded-full flex justify-center items-center text-accent text-base hover:bg-accent hover:text-primary hover:transition-all duration-500"
-                />
-              </div>
-            </div>
+            <Social
+              containerStyles="flex justify-center xl:justify-start gap-4"
+              iconStyles="w-10 h-10 border border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-primary transition-all duration-300"
+            />
           </div>
-          {/* photo */}
-          <div className="order-1 xl:order-none mb-8 xl:mb-0">
+          <div className="mt-8 xl:mt-0 xl:w-1/2">
             <Photo />
           </div>
         </div>

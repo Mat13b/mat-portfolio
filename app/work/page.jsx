@@ -19,72 +19,57 @@ import Link from "next/link";
 import Image from "next/image";
 import WorkSliderBtns from "@/components/WorkSliderBtns";
 
-const projects = [
+const projets = [
   {
     num: "01",
-    category: "frontend",
-    title: "project 1",
+    categorie: "frontend",
+    titre: "projet 1",
     description:
       "Développement de site web ",
-    stack: [{ name: "Html 5" }, { name: "Css 3" }, { name: "Javascript" }],
+    technologies: [{ nom: "Html 5" }, { nom: "Css 3" }, { nom: "Javascript" }],
     image: "/assets/127.0.0.1_5501_index.html(1_Desktop).png",
-    live: "https://ez-bike-beta.vercel.app/",
+    lienDirect: "https://ez-bike-beta.vercel.app/",
     github: "https://github.com/KD63799/EZ_Bike ",
   },
   {
     num: "02",
-    category: "fullstack",
-    title: "project 2",
+    categorie: "fullstack",
+    titre: "projet 2",
     description:
       "Création d'un site web pour mon projet de fin de formation",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }, { name: "Node.js" }],
-    image: "",
-    live: "",
-    github: "",
+    technologies: [{ nom: "React.JS" }, { nom: "Tailwind.css" }, { nom: "Node.js" }, { nom: "ExpressJS" }],
+    image: "/assets/Capture d’écran 2024-08-27 à 17.53.48.png",
+    lienDirect: "https://arena-maven.onrender.com/",
+    github: "https://github.com/yuuta2s/arena_maven",
   },
   {
     num: "03",
-    category: "frontend",
-    title: "project 3",
+    categorie: "frontend",
+    titre: "projet 3",
     description:
       "Mes projets personnels",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
+    technologies: [{ nom: "Next.js" }, { nom: "Tailwind.css" }],
     image: "/assets/Capture d’écran 2024-06-14 à 23.52.19.png",
-    live: "",
     github: "https://github.com/Mat13b/Formul-air",
   },
   {
     num: "04",
-    category: "frontend",
-    title: "project 4",
+    categorie: "frontend",
+    titre: "projet 4",
     description:
       "Projet de démonstration",
-    stack: [{ name: "React" }, { name: "CSS" }],
-    image: "",
-    live: "",
+    technologies: [{ nom: "Html 5" }, { nom: "Css 3" }, { nom: "Javascript" }],
+    image: "/assets/Capture d’écran 2024-08-27 à 18.06.55.png",
     github: "https://github.com/jlaron230/ProjetX",
-  },
-  {
-    num: "05",
-    category: "fullstack",
-    title: "project 5",
-    description:
-      "Projet de démonstration",
-    stack: [{ name: "Next.js" }, { name: "Tailwind.css" }],
-    image: "/assets/work/Capture d’écran 2024-06-14 à 23.07.38.png",
-    live: "",
-    github: "",
   },
 ];
 
-const Work = () => {
-  const [project, setProject] = useState(projects[0]);
+const Travail = () => {
+  const [projet, setProjet] = useState(projets[0]);
 
-  const handleSlideChange = (swiper) => {
-    // get current slide index
-    const currentIndex = swiper.activeIndex;
-    // update project state based on current slide index
-    setProject(projects[currentIndex]);
+  const gererChangementDiapo = (swiper) => {
+    const indexActuel = swiper.activeIndex;
+    setProjet(projets[indexActuel]);
   };
 
   return (
@@ -100,58 +85,53 @@ const Work = () => {
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">
           <div className="w-full xl:w-[50%] xl:h-[460px] flex flex-col xl:justify-between order-2 xl:order-none">
             <div className="flex flex-col gap-[30px] h-[50%]">
-              {/* outline num */}
               <div className="text-8xl leading-none font-extrabold text-transparent text-outline">
-                {project.num}
+                {projet.num}
               </div>
-              {/* project category */}
               <h2 className="text-[42px] font-bold leading-none text-white group-hover:text-accent transition-all duration-500 capitalize">
-                {project.category} project
+                Projet {projet.categorie}
               </h2>
-              {/* project description */}
-              <p className="text-white/60">{project.description}</p>
-              {/* stack */}
+              <p className="text-white/60">{projet.description}</p>
               <ul className="flex gap-4">
-                {project.stack.map((item, index) => {
+                {projet.technologies.map((item, index) => {
                   return (
                     <li key={index} className="text-xl text-accent">
-                      {item.name}
-                      {/* remove the last comma */}
-                      {index !== project.stack.length - 1 && ","}
+                      {item.nom}
+                      {index !== projet.technologies.length - 1 && ","}
                     </li>
                   );
                 })}
               </ul>
-              {/* border */}
               <div className="border border-white/20"></div>
-              {/* buttons */}
               <div className="flex items-center gap-4">
-                {/* live project button */}
-                <Link href={project.live}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Live project</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
-                {/* github project button */}
-                <Link href={project.github}>
-                  <TooltipProvider delayDuration={100}>
-                    <Tooltip>
-                      <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
-                        <BsGithub className="text-white text-3xl group-hover:text-accent" />
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Github repository</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </Link>
+                {projet.lienDirect && (
+                  <Link href={projet.lienDirect}>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsArrowUpRight className="text-white text-3xl group-hover:text-accent" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Voir le projet en direct</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
+                {projet.github && (
+                  <Link href={projet.github}>
+                    <TooltipProvider delayDuration={100}>
+                      <Tooltip>
+                        <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-white/5 flex justify-center items-center group">
+                          <BsGithub className="text-white text-3xl group-hover:text-accent" />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Dépôt Github</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </Link>
+                )}
               </div>
             </div>
           </div>
@@ -160,18 +140,16 @@ const Work = () => {
               spaceBetween={30}
               slidesPerView={1}
               className="xl:h-[520px] mb-12"
-              onSlideChange={handleSlideChange}
+              onSlideChange={gererChangementDiapo}
             >
-              {projects.map((project, index) => {
+              {projets.map((projet, index) => {
                 return (
                   <SwiperSlide key={index} className="w-full">
                     <div className="h-[460px] relative group flex justify-center items-center bg-pink-50/20">
-                      {/* overlay */}
                       <div className="absolute top-0 bottom-0 w-full h-full bg-black/10 z-10"></div>
-                      {/* image */}
                       <div className="relative w-full h-full">
                         <Image
-                          src={project.image}
+                          src={projet.image}
                           fill
                           className="object-cover"
                           alt=""
@@ -181,7 +159,6 @@ const Work = () => {
                   </SwiperSlide>
                 );
               })}
-              {/* slider buttons */}
               <WorkSliderBtns
                 containerStyles="flex gap-2 absolute right-0 bottom-[calc(50%_-_22px)] xl:bottom-0 z-20 w-full justify-between xl:w-max xl:justify-none"
                 btnStyles="bg-accent hover:bg-accent-hover text-primary text-[22px] w-[44px] h-[44px] flex justify-center items-center transition-all"
@@ -194,4 +171,4 @@ const Work = () => {
   );
 };
 
-export default Work;
+export default Travail;
