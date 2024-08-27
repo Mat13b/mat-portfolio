@@ -21,12 +21,14 @@ export default function RootLayout({ children }) {
 
   const { scene, camera, geometry, material } = useMemo(() => {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight);
+    let camera;
+    if (typeof window !== 'undefined') {
+      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight);
+      camera.position.set(0, 1, 2);
+      camera.lookAt(0, -0.5, 0);
+    }
     const geometry = computeGeometry();
     const material = new THREE.PointsMaterial({ size: 0.015, vertexColors: true });
-    
-    camera.position.set(0, 1, 2);
-    camera.lookAt(0, -0.5, 0);
     
     return { scene, camera, geometry, material };
   }, []);
