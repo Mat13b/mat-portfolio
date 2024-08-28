@@ -1,23 +1,23 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button"; // Correction du chemin d'importation pour Button
+import { Button } from "@/components/ui/button";
 
-// components
-import Nav from "@/components/Nav"; // Correction du chemin d'importation pour Nav
-import MobileNav from "@/components/MobileNav"; // Correction du chemin d'importation pour MobileNav
+// composants
+import Nav from "@/components/Nav";
+import MobileNav from "@/components/MobileNav"
 
 const Header = () => {
   return (
-    <header className="py-8 xl:py-12 text-white">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="py-8 text-white xl:py-12">
+      <div className="container flex items-center justify-between">
         {/* logo */}
         <Link href="/">
           <h1 className="text-4xl font-semibold">
-            Mathieu<span className="text-accent"></span>
+            Mathieu
+            <span className="text-accent"></span>
           </h1>
         </Link>
-
         {/* navigation pour desktop et bouton 'Hire me' */}
-        <div className="hidden xl:flex items-center gap-8">
+        <div className="items-center hidden gap-8 xl:flex">
           <Nav />
           <Link href="/contact">
           </Link>

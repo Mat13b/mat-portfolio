@@ -19,7 +19,7 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
 
-  const { scene, camera, geometry, material } = useMemo(() => {
+  const { scene, camera, geometry, material, light } = useMemo(() => {
     const scene = new THREE.Scene();
     let camera;
     if (typeof window !== 'undefined') {
@@ -29,8 +29,10 @@ export default function RootLayout({ children }) {
     }
     const geometry = computeGeometry();
     const material = new THREE.PointsMaterial({ size: 0.015, vertexColors: true });
+    const light = new THREE.PointLight(0xffffff, 2.5, 100);
+    light.position.set(0, 10, 10);
     
-    return { scene, camera, geometry, material };
+    return { scene, camera, geometry, material, light };
   }, []);
 
   useEffect(() => {
@@ -41,6 +43,7 @@ export default function RootLayout({ children }) {
 
     const mesh = new THREE.Points(geometry, material);
     scene.add(mesh);
+    scene.add(light);
 
     const clock = new THREE.Clock();
     let animationFrameId;
@@ -48,7 +51,9 @@ export default function RootLayout({ children }) {
     const loop = () => {
       const t = clock.getElapsedTime();
       animeGeometry(geometry, t);
-      mesh.rotation.y = 0.1 * t;
+      mesh.rotation.y = 0.05 * t;
+      light.position.x = Math.sin(t) * 3;
+      light.position.z = Math.cos(t) * 3;
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(loop);
     };
@@ -68,7 +73,7 @@ export default function RootLayout({ children }) {
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
     };
-  }, [scene, camera, geometry, material]);
+  }, [scene, camera, geometry, material, light]);
 
   return (
     <html lang="fr">
@@ -83,7 +88,7 @@ export default function RootLayout({ children }) {
 }
 
 function computeGeometry() {
-  const space = 4, nb = 100, amp = 0.1, fre = 1, pi2 = Math.PI * 2;
+  const space = 4, nb = 80, amp = 0.08, fre = 0.8, pi2 = Math.PI * 2;
   const geometry = new THREE.BufferGeometry();
   const positions = new Float32Array(nb * nb * 3);
   const colors = new Float32Array(nb * nb * 3);
@@ -98,10 +103,10 @@ function computeGeometry() {
       positions[3 * k + 1] = y;
       positions[3 * k + 2] = z;
       
-      const intensity = (y / amp) / 2 + 0.3;
-      colors[3 * k] = intensity;
-      colors[3 * k + 1] = j / nb * intensity;
-      colors[3 * k + 2] = i / nb * intensity;
+      const intensity = (y / amp) / 4 + 0.25;
+      colors[3 * k] = intensity * 0.7;
+      colors[3 * k + 1] = j / nb * intensity * 0.5;
+      colors[3 * k + 2] = i / nb * intensity * 0.5;
     }
   }
   
@@ -113,9 +118,9 @@ function computeGeometry() {
 }
 
 function animeGeometry(geometry, progress) {
-  const space = 4, nb = 100, amp = 0.1, pi2 = Math.PI * 2;
-  const phase = progress;
-  const fre = 0.8 + Math.cos(progress) / 2;
+  const space = 4, nb = 80, amp = 0.08, pi2 = Math.PI * 2;
+  const phase = progress * 0.5;
+  const fre = 0.6 + Math.cos(progress * 0.5) / 4;
   const positions = geometry.attributes.position.array;
   const colors = geometry.attributes.color.array;
   
@@ -127,10 +132,10 @@ function animeGeometry(geometry, progress) {
       
       positions[3 * k + 1] = y;
       
-      const intensity = (y / amp) / 2 + 0.3;
-      colors[3 * k] = intensity;
-      colors[3 * k + 1] = j / nb * intensity;
-      colors[3 * k + 2] = i / nb * intensity;
+      const intensity = (y / amp) / 4 + 0.25;
+      colors[3 * k] = intensity * 0.7;
+      colors[3 * k + 1] = j / nb * intensity * 0.5;
+      colors[3 * k + 2] = i / nb * intensity * 0.5;
     }
   }
   

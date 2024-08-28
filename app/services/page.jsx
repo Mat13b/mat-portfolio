@@ -6,30 +6,30 @@ import Link from "next/link";
 const services = [
   {
     num: "01",
-    title: "Web Development",
+    title: "Development Web ",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Etre en charge de crée des applications web et mobile de son design jusqu'à son déploiement",
     href: "",
   },
   {
     num: "02",
     title: "UI/UX Design",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Etre en charge de crée des intefaces utilisateur pour les applications web et mobile",
     href: "",
   },
   {
     num: "03",
     title: "Logo Design",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Realisation de logo pour les entreprises et les particuliers",
     href: "",
   },
   {
     num: "04",
     title: "SEO",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque tenetur.",
+      "Optimisation de votre site web pour les moteurs de recherche",
     href: "",
   },
 ];
@@ -52,18 +52,18 @@ const Services = () => {
             return (
               <div
                 key={index}
-                className="flex-1 flex flex-col justify-center gap-6 group"
+                className="flex flex-col justify-center flex-1 gap-6 group"
               >
                 {/* top */}
-                <div className="w-full flex justify-between items-center">
-                  <div className="text-5xl font-extrabold text-outline text-transparent group-hover:text-outline-hover transition-all duration-500">
+                <div className="flex items-center justify-between w-full">
+                  <div className="text-5xl font-extrabold text-transparent transition-all duration-500 text-outline group-hover:text-outline-hover">
                     {service.num}
                   </div>
                   <Link
                     href={service.href}
                     className="w-[70px] h-[70px] rounded-full bg-white group-hover:bg-accent transition-all duration-500 flex justify-center items-center hover:-rotate-45"
                   >
-                    <BsArrowDownRight className="text-primary text-3xl" />
+                    <BsArrowDownRight className="text-3xl text-primary" />
                   </Link>
                 </div>
                 {/* title */}
@@ -73,7 +73,7 @@ const Services = () => {
                 {/* description */}
                 <p className="text-white/60">{service.description}</p>
                 {/* border */}
-                <div className="border-b border-white/20 w-full"></div>
+                <div className="w-full border-b border-white/40"></div>
               </div>
             );
           })}

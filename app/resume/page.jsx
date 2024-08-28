@@ -7,30 +7,31 @@ import {
   FaReact,
   FaFigma,
   FaNodeJs, 
+  FaDatabase
 } from "react-icons/fa";
 
 import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
 
 // about data
-const about = {
-  title: "About me",
+const aProposDeMoi = {
+  title: "À propos de moi",
   description:
     "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
   info: [
     {
-      fieldName: "Name",
+      fieldName: "Nom",
       fieldValue: "Mathieu Schmitt",
     },
     {
-      fieldName: "Phone",
+      fieldName: "Téléphone",
       fieldValue: "07 68 56 13 38",
     },
     {
-      fieldName: "Experience",
+      fieldName: "Expérience",
       fieldValue: "1 an",
     },
     {
-      fieldName: "Nationality",
+      fieldName: "Nationalité",
       fieldValue: "Française",
     },
     {
@@ -38,7 +39,7 @@ const about = {
       fieldValue: "mathieu.schmitt13@icloud.com",
     },
     {
-      fieldName: "Languages",
+      fieldName: "Langues",
       fieldValue: "Français, Anglais",
     },
   ],
@@ -47,23 +48,23 @@ const about = {
 // experience data
 const experience = {
   icon: "/assets/resume/badge.svg",
-  title: "My experience",
+  title: "Mon expérience",
   description:
     "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
   items: [
     {
       company: "Simplon",
       position: "Développeur web fullstack junior",
-      duration: "2023 - Present",
+      duration: "2023 - aujourd'hui",
     },
     {
       company: "Simplon",
-      position: "Create a figma website ",
-      duration: "2023 - Present",
+      position: "Création de maquette graphique",
+      duration: "2023 - aujourd'hui",
     },
     {
       company: "Move Expert",
-      position: "Manage administratif operation",
+      position: "Manager des opérations administratives",
       duration: "2019 - 2022",
     },
   ],
@@ -72,22 +73,22 @@ const experience = {
 // education data
 const education = {
   icon: "/assets/resume/cap.svg",
-  title: "My education",
+  title: "Mes formations",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "J'ai suivi une formation de développeur web fullstack, je suis actuellement capable de développer des sites web et des applications web",
   items: [
     {
       institution: "Simplon.co",
-      degree: "Full Stack Web Development website",
+      degree: "Développement Web Full Stack",
       duration: "2023 - 2024",
     },
     {
-      institution: "Lycee Sainte marie ",
+      institution: "Lycée Sainte Marie",
       degree: "BTS Transport et prestations logistiques",
       duration: "2019 - 2022",
     },
     {
-      institution: "Lycee Sainte marie ",
+      institution: "Lycée Sainte Marie",
       degree: "Bac Gestion Administration",
       duration: "2015 - 2019",
     },
@@ -97,41 +98,41 @@ const education = {
 
 // skills data
 const skills = {
-  title: "My skills",
+  title: "Mes compétences",
   description:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates quibusdam, sunt explicabo inventore.",
+    "J'ai acquis des compétences en développement web fullstack en apprenant les langages suivants : ",
   skillList: [
     {
       icon: <FaHtml5 />,
-      name: "html 5",
+      name: "HTML 5",
     },
     {
       icon: <FaCss3 />,
-      name: "css 3",
+      name: "CSS 3",
     },
     {
       icon: <FaJs />,
-      name: "javascript",
+      name: "JavaScript",
     },
     {
       icon: <FaReact />,
-      name: "react.js",
+      name: "React.js",
     },
     {
       icon: <SiNextdotjs />,
-      name: "next.js",
+      name: "Next.js",
     },
     {
       icon: <SiTailwindcss />,
-      name: "tailwind.css",
+      name: "Tailwind CSS",
     },
     {
       icon: <FaNodeJs />,
-      name: "node.js ( en cours d'apprentissage )",
+      name: "Node.js",
     },
     {
-      icon: <FaFigma />,
-      name: "figma",
+      icon: <FaDatabase />,
+      name: "SQL",
     },
   ],
 };
@@ -164,10 +165,10 @@ const Resume = () => {
           className="flex flex-col xl:flex-row gap-[60px]"
         >
           <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6">
-            <TabsTrigger value="experience">Experience</TabsTrigger>
-            <TabsTrigger value="education">Education</TabsTrigger>
-            <TabsTrigger value="skills">Skills</TabsTrigger>
-            <TabsTrigger value="about">About me</TabsTrigger>
+            <TabsTrigger value="experience">Expérience</TabsTrigger>
+            <TabsTrigger value="education">Formation</TabsTrigger>
+            <TabsTrigger value="skills">Compétences</TabsTrigger>
+            <TabsTrigger value="about">À propos de moi</TabsTrigger>
           </TabsList>
 
           {/* content */}
@@ -252,7 +253,7 @@ const Resume = () => {
                         <TooltipProvider delayDuration={100}>
                           <Tooltip>
                             <TooltipTrigger className="w-full h-[150px] bg-[#232329] rounded-xl flex justify-center items-center group">
-                              <div className="text-6xl group-hover:text-accent transition-all duration-300">
+                              <div className="text-6xl transition-all duration-300 group-hover:text-accent">
                                 {skill.icon}
                               </div>
                             </TooltipTrigger>
@@ -270,20 +271,20 @@ const Resume = () => {
 
             {/* about */}
             <TabsContent
-              value="about"
+              value="a propos de moi"
               className="w-full text-center xl:text-left"
             >
               <div className="flex flex-col gap-[30px]">
-                <h3 className="text-4xl font-bold">{about.title}</h3>
+                <h3 className="text-4xl font-bold">{aProposDeMoi.title}</h3>
                 <p className="max-w-[600px] text-white/60 mx-auto xl:mx-0">
-                  {about.description}
+                  {aProposDeMoi.description}
                 </p>
                 <ul className="grid grid-cols-1 xl:grid-cols-2 gap-y-6 max-w-[620px] mx-auto xl:mx-0">
-                  {about.info.map((item, index) => {
+                  {aProposDeMoi.info.map((item, index) => {
                     return (
                       <li
                         key={index}
-                        className="flex items-center justify-center xl:justify-start gap-4"
+                        className="flex items-center justify-center gap-4 xl:justify-start"
                       >
                         <span className="text-white/60">{item.fieldName}</span>
                         <span className="text-xl">{item.fieldValue}</span>
