@@ -1,32 +1,37 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { motion } from 'framer-motion';
+import React from 'react';
 
-// components
-import Stairs from "./Stairs";
+const StairTransition = ({ children }) => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
+  };
 
-const StairTransition = () => {
-  const pathname = usePathname();
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <>
-      <AnimatePresence mode="wait">
-        <div key={pathname}>
-          <div className="h-screen w-screen fixed top-0 left-0 right-0 pointer-events-none z-40 flex">
-            <Stairs />
-          </div>
-
-          <motion.div
-            className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
-            inital={{ opacity: 1 }}
-            animate={{
-              opacity: 0,
-              transition: { delay: 1, duration: 0.4, ease: "easeInOut" },
-            }}
-          />
-        </div>
-      </AnimatePresence>
-    </>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {React.Children.map(children, (child, index) => (
+        <motion.div key={index} variants={itemVariants}>
+          {child}
+        </motion.div>
+      ))}
+    </motion.div>
   );
 };
 

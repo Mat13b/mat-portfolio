@@ -22,13 +22,14 @@ const Photo = () => {
           }}
           className="w-[298px] h-[298px] xl:w-[498px] xl:h-[498px] mix-blend-lighten absolute"
         >
-                  <Image
+          <Image
             src="/assets/IMG_0613_2.jpg"
-            priority
-            quality={100}
-            fill
-            alt=""
+            alt="Description de l'image"
+            width={100}  // Ajustez selon vos besoins
+            height={100} // Ajustez selon vos besoins
+            layout="responsive"
             className="object-contain rounded-full"
+            loading="lazy"
           />
         </motion.div>
 

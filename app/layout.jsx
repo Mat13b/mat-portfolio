@@ -76,7 +76,11 @@ export default function RootLayout({ children }) {
   }, [scene, camera, geometry, material, light]);
 
   return (
-    <html lang="fr">
+    <html lang="fr" className={jetbrainsMono.variable}>
+      <head>
+        <link rel="preload" href="/fonts/your-font.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
+        {/* Autres préchargements */}
+      </head>
       <body className={jetbrainsMono.variable}>
         <canvas ref={canvasRef} />
         <Header />

@@ -152,7 +152,7 @@ const Travail = () => {
                           src={projet.image}
                           fill
                           className="object-cover"
-                          alt=""
+                          alt="Projet"
                         />
                       </div>
                     </div>
