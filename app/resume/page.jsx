@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import {
@@ -152,10 +153,16 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 
 export default function ResumePage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <ResumeContent />
+    </Suspense>
+  );
+}
+
+function ResumeContent() {
   const searchParams = useSearchParams();
-  
-  // Utilisez searchParams.get() au lieu de searchParams.toJSON()
-  const someParam = searchParams.get('someParam');
+  const someParam = searchParams.get('someParam'); // Assurez-vous que 'someParam' est le bon paramètre
 
   return (
     <motion.div

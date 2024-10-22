@@ -1,11 +1,15 @@
 "use client";
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import React from 'react';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import Stairs from './Stairs'; // Assurez-vous que ce composant existe
+import { usePathname } from 'next/navigation';
 
 const StairTransition = ({ children }) => {
+  const pathname = usePathname();
+  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -56,6 +60,7 @@ const StairTransition = ({ children }) => {
           />
         </div>
       </AnimatePresence>
+      {children}
     </>
   );
 };

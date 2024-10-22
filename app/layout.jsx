@@ -4,7 +4,6 @@ import { useEffect, useRef, useMemo } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import * as THREE from "three";
 import "./globals.css";
-import { metadata } from './layout.metadata';
 
 // composants
 import Header from "@/components/Header";
@@ -16,8 +15,6 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrainsMono",
 });
-
-export { metadata };
 
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
