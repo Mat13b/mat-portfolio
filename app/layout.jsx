@@ -4,6 +4,7 @@ import { useEffect, useRef, useMemo } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import * as THREE from "three";
 import "./globals.css";
+import { metadata } from './layout.metadata';
 
 // composants
 import Header from "@/components/Header";
@@ -15,6 +16,8 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrainsMono",
 });
+
+export { metadata };
 
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
@@ -77,23 +80,6 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="fr">
-      <Head>
-        <title>Mat'porfolio</title>
-        <meta name="description" content="Portfolio de Mathieu , développeur web full stack junior" />
-        <meta name="keywords" content="portfolio, mathieu, développeur, web, full stack, junior" />
-        <meta name="author" content="Mathieu Schmitt" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="robots" content="index, follow" />
-        <meta property="og:title" content="Mat'portfolio" />
-        <meta property="og:description" content="Portfolio de Mathieu, développeur web full stack junior" />
-        <meta property="og:url" content="https://mat-portfolio.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Mat'portfolio" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@Mathieuschmit16" />
-        <meta name="twitter:creator" content="@Mathieuschmit16" />
-        <meta http-equiv="content-language" content="fr" />
-      </Head>
       <body className={jetbrainsMono.variable}>
         <canvas ref={canvasRef} />
         <Header />

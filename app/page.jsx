@@ -1,6 +1,7 @@
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import DynamicComponentWrapper from "@/components/DynamicComponentWrapper";
+import dynamic from 'next/dynamic';
 
 const StairTransition = dynamic(() => import('../components/StairTransition'), {
   ssr: true
