@@ -1,5 +1,7 @@
 "use client";
 
+import { useSearchParams } from 'next/navigation';
+
 import {
   FaHtml5,
   FaCss3,
@@ -149,7 +151,12 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 
-const Resume = () => {
+export default function ResumePage() {
+  const searchParams = useSearchParams();
+  
+  // Utilisez searchParams.get() au lieu de searchParams.toJSON()
+  const someParam = searchParams.get('someParam');
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -271,7 +278,7 @@ const Resume = () => {
 
             {/* about */}
             <TabsContent
-              value="a propos de moi"
+              value="about"
               className="w-full text-center xl:text-left"
             >
               <div className="flex flex-col gap-[30px]">
@@ -299,6 +306,4 @@ const Resume = () => {
       </div>
     </motion.div>
   );
-};
-
-export default Resume;
+}

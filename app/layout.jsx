@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useMemo } from "react";
+import Head from "next/head";
 import { JetBrains_Mono } from "next/font/google";
 import * as THREE from "three";
 import "./globals.css";
@@ -76,11 +77,24 @@ export default function RootLayout({ children }) {
   }, [scene, camera, geometry, material, light]);
 
   return (
-    <html lang="fr" className={jetbrainsMono.variable}>
-      <head>
-        <link rel="preload" href="/fonts/your-font.woff2" as="font" type="font/woff2" crossOrigin="anonymous" />
-        {/* Autres préchargements */}
-      </head>
+    <html lang="fr">
+      <Head>
+        <title>Mat'porfolio</title>
+        <meta name="description" content="Portfolio de Mathieu , développeur web full stack junior" />
+        <meta name="keywords" content="portfolio, mathieu, développeur, web, full stack, junior" />
+        <meta name="author" content="Mathieu Schmitt" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:title" content="Mat'portfolio" />
+        <meta property="og:description" content="Portfolio de Mathieu, développeur web full stack junior" />
+        <meta property="og:url" content="https://mat-portfolio.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Mat'portfolio" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@Mathieuschmit16" />
+        <meta name="twitter:creator" content="@Mathieuschmit16" />
+        <meta http-equiv="content-language" content="fr" />
+      </Head>
       <body className={jetbrainsMono.variable}>
         <canvas ref={canvasRef} />
         <Header />
