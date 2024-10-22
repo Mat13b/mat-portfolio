@@ -1,36 +1,52 @@
 "use client";
 
 import { motion, AnimatePresence } from 'framer-motion';
-import React, { useLayoutEffect, useRef } from 'react';
+import React from 'react';
+import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Stairs from './Stairs'; // Assurez-vous que ce composant existe
 import { usePathname } from 'next/navigation';
 
 const StairTransition = ({ children }) => {
   const pathname = usePathname();
+  
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   const stairRef = useRef(null);
 
-  useLayoutEffect(() => {
-    if (stairRef.current && stairRef.current.children) {
-      const ctx = gsap.context(() => {
-        gsap.to(stairRef.current.children, {
-          y: 0,
-          opacity: 1,
-          stagger: 0.1,
-          ease: 'power3.out',
-          duration: 0.5,
-        });
-      }, stairRef);
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(stairRef.current.children, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        ease: 'power3.out',
+        duration: 0.5,
+      })
+    }, stairRef)
 
-      return () => ctx.revert();
-    }
-  }, []);
+    return () => ctx.revert()
+  }, [])
 
   return (
     <>
       <AnimatePresence mode="wait">
         <div key={pathname}>
-          <div ref={stairRef} className="h-screen w-screen fixed top-0 left-0 right-0 pointer-events-none z-40 flex">
+          <div className="h-screen w-screen fixed top-0 left-0 right-0 pointer-events-none z-40 flex">
             <Stairs />
           </div>
 

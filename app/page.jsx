@@ -10,7 +10,7 @@ const StairTransition = dynamic(() => import('../components/StairTransition'), {
 export default function Home() {
   return (
     <main>
-      <h1>Bienvenue sur mon portfolio</h1>
+     
       <StairTransition>
         <section className="h-full">
           <div className="container h-full mx-auto">
