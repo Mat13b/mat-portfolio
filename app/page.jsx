@@ -1,15 +1,9 @@
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
-
-const DynamicComponent = dynamic(() => import('../components/HeavyComponent'), {
-  loading: () => <p>Chargement...</p>,
-  ssr: false
-});
+import DynamicComponentWrapper from "@/components/DynamicComponentWrapper";
 
 const StairTransition = dynamic(() => import('../components/StairTransition'), {
-  ssr: false,
+  ssr: true
 });
 
 export default function Home() {
@@ -39,9 +33,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <Suspense fallback={<p>Chargement du composant lourd...</p>}>
-          <DynamicComponent />
-        </Suspense>
+        <DynamicComponentWrapper />
       </StairTransition>
     </main>
   );

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useMemo } from "react";
-import Head from "next/head";
 import { JetBrains_Mono } from "next/font/google";
 import * as THREE from "three";
 import "./globals.css";
@@ -16,13 +15,6 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
   variable: "--font-jetbrainsMono",
 });
-
-export const metadata = {
-  title: 'Votre Portfolio',
-  description: 'Description de votre portfolio',
-  viewport: 'width=device-width, initial-scale=1',
-  charset: 'utf-8',
-};
 
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
