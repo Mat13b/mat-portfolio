@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion';
 import React from 'react';
+import { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 
 const StairTransition = ({ children }) => {
   const containerVariants = {
@@ -19,6 +21,22 @@ const StairTransition = ({ children }) => {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
   };
+
+  const stairRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(stairRef.current.children, {
+        y: 0,
+        opacity: 1,
+        stagger: 0.1,
+        ease: 'power3.out',
+        duration: 0.5,
+      })
+    }, stairRef)
+
+    return () => ctx.revert()
+  }, [])
 
   return (
     <>

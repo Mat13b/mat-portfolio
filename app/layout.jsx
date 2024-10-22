@@ -17,6 +17,13 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrainsMono",
 });
 
+export const metadata = {
+  title: 'Votre Portfolio',
+  description: 'Description de votre portfolio',
+  viewport: 'width=device-width, initial-scale=1',
+  charset: 'utf-8',
+};
+
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
 

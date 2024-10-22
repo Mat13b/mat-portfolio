@@ -1,15 +1,15 @@
-export default function RobotsTxt() {
-  return null;
-}
+import { NextResponse } from 'next/server';
 
-export async function getServerSideProps({ res }) {
-  res.setHeader('Content-Type', 'text/plain');
-  res.write(`User-agent: *
+export async function GET() {
+  const robotsTxt = `User-agent: *
 Allow: /
 
-# Sitemap sera ajouté ultérieurement
-# Sitemap: https://www.votresite.com/sitemap.xml`);
-  res.end();
+Sitemap: https://mat-portfolio.vercel.app/sitemap.xml`;
 
-  return { props: {} };
+  return new NextResponse(robotsTxt, {
+    headers: {
+      'Content-Type': 'text/plain',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600, stale-while-revalidate=86400',
+    },
+  });
 }
