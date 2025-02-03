@@ -29,35 +29,59 @@ export default function RootLayout({ children }) {
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+    camera.position.z = 4;  // Plus éloigné
+    camera.position.y = 1;  // Un peu plus haut
+
     const geometry = new THREE.BufferGeometry();
-    const count = 5000;
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
+    const nb = 50;  // Garde le même nombre de points
+    const positions = new Float32Array(nb * nb * 3);
+    const colors = new Float32Array(nb * nb * 3);
 
-    for (let i = 0; i < count * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 10;
-      positions[i + 1] = (Math.random() - 0.5) * 10;
-      positions[i + 2] = (Math.random() - 0.5) * 10;
+    for (let i = 0; i < nb; i++) {
+      for (let j = 0; j < nb; j++) {
+        const k = i * nb + j;
+        positions[k * 3] = (i / nb - 0.5) * 5;     // x (plus étalé)
+        positions[k * 3 + 1] = 0;                   // y
+        positions[k * 3 + 2] = (j / nb - 0.5) * 5;  // z (plus étalé)
 
-      colors[i] = 0;
-      colors[i + 1] = 1;  // Vert
-      colors[i + 2] = 0.5;
+        // Dégradé de rose à rouge à jaune
+        colors[k * 3] = 1.0;                        // Rouge (max)
+        colors[k * 3 + 1] = j / nb * 0.8;          // Vert (pour le jaune)
+        colors[k * 3 + 2] = i / nb * 0.8;          // Bleu (pour le rose)
+      }
     }
 
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
     geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
     const material = new THREE.PointsMaterial({
-      size: 0.02,
+      size: 0.04,          // Points un peu plus gros
       vertexColors: true,
       transparent: true,
-      opacity: 0.8,
+      opacity: 0.7,        // Un peu plus opaque
     });
 
     const points = new THREE.Points(geometry, material);
     scene.add(points);
 
-    camera.position.z = 3;
+    const animate = () => {
+      requestAnimationFrame(animate);
+      const positions = geometry.attributes.position.array;
+      const time = Date.now() * 0.0008;  // Animation plus lente
+
+      for (let i = 0; i < nb; i++) {
+        for (let j = 0; j < nb; j++) {
+          const k = i * nb + j;
+          positions[k * 3 + 1] = Math.sin(i * 0.5 + time) * 0.15 + 
+                                Math.sin(j * 0.5 + time) * 0.15;
+        }
+      }
+
+      geometry.attributes.position.needsUpdate = true;
+      renderer.render(scene, camera);
+    };
+
+    animate();
 
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -66,14 +90,6 @@ export default function RootLayout({ children }) {
     };
 
     window.addEventListener('resize', handleResize);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      points.rotation.y += 0.001;
-      renderer.render(scene, camera);
-    };
-
-    animate();
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -101,60 +117,5 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-}
-function computeGeometry() {
-  const space = 4, nb = 80, amp = 0.08, fre = 0.8, pi2 = Math.PI * 2;
-  const geometry = new THREE.BufferGeometry();
-  const positions = new Float32Array(nb * nb * 3);
-  const colors = new Float32Array(nb * nb * 3);
-  
-  for (let i = 0, k = 0; i < nb; i++) {
-    for (let j = 0; j < nb; j++, k++) {
-      const x = i * (space / nb) - space / 2;
-      const z = j * (space / nb) - space / 2;
-      const y = amp * (Math.cos(x * pi2 * fre) + Math.sin(z * pi2 * fre));
-      
-      positions[3 * k] = x;
-      positions[3 * k + 1] = y;
-      positions[3 * k + 2] = z;
-      
-      const intensity = (y / amp) / 4 + 0.25;
-      colors[3 * k] = intensity * 0.7;
-      colors[3 * k + 1] = j / nb * intensity * 0.5;
-      colors[3 * k + 2] = i / nb * intensity * 0.5;
-    }
-  }
-  
-  geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-  geometry.computeBoundingBox();
-  
-  return geometry;
-}
-
-function animeGeometry(geometry, progress) {
-  const space = 4, nb = 80, amp = 0.08, pi2 = Math.PI * 2;
-  const phase = progress * 0.5;
-  const fre = 0.6 + Math.cos(progress * 0.5) / 4;
-  const positions = geometry.attributes.position.array;
-  const colors = geometry.attributes.color.array;
-  
-  for (let i = 0, k = 0; i < nb; i++) {
-    for (let j = 0; j < nb; j++, k++) {
-      const x = i * (space / nb) - space / 2;
-      const z = j * (space / nb) - space / 2;
-      const y = amp * (Math.cos(x * pi2 * fre + phase) + Math.sin(z * pi2 * fre + phase));
-      
-      positions[3 * k + 1] = y;
-      
-      const intensity = (y / amp) / 4 + 0.25;
-      colors[3 * k] = intensity * 0.7;
-      colors[3 * k + 1] = j / nb * intensity * 0.5;
-      colors[3 * k + 2] = i / nb * intensity * 0.5;
-    }
-  }
-  
-  geometry.attributes.position.needsUpdate = true;
-  geometry.attributes.color.needsUpdate = true;
 }
 
