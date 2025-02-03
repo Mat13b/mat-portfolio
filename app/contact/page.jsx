@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Snackbar, Alert } from "@mui/material";
+import emailjs from '@emailjs/browser';
+import dynamic from 'next/dynamic';
 
 import {
   Select,
@@ -18,6 +20,11 @@ import {
 
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 
+import { motion } from "framer-motion";
+
+// Initialisez EmailJS (à mettre dans votre composant)
+emailjs.init("SLg2UipHeSFDgf8MD");
+
 const info = [
   {
     icon: <FaPhoneAlt />,
@@ -29,44 +36,96 @@ const info = [
     title: "Email",
     description: "mathieu.schmitt13@icloud.com",
   },
-  {
-    icon: <FaMapMarkerAlt />,
-    title: "Address",
-    description: "450 chemin de l'enclos",
-  },
 ];
 
-import { motion } from "framer-motion";
+// Composant avec SSR désactivé
+const ContactForm = dynamic(() => Promise.resolve(Contact), {
+  ssr: false
+});
 
-const Contact = () => {
+// Composant principal
+function Contact() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
 
-  const validateInput = (type, value) => {
-    const regexPatterns = {
-      email: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-      phone: /^\+?\d{10,15}$/,
-      text: /^[a-zA-Z\s]*$/,
-    };
-    return value ? regexPatterns[type].test(value) : false;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+
+  const [status, setStatus] = useState({
+    loading: false,
+    error: null,
+    success: false
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
   };
 
-  const validateMessage = (message) => {
-    // Vérifiez si le message contient au moins 10 mots
-    const words = message.trim().split(/\s+/);
-    return words.length >= 10;
+  // Fonction de validation du téléphone
+  const isValidPhone = (phone) => {
+    const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
+    return phoneRegex.test(phone);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const message = e.target.elements.message.value;
-    if (validateMessage(message)) {
-      // Ici, vous pouvez ajouter la logique pour envoyer le message
-      setSnackbarMessage("Votre message a été envoyé avec succès. Nous vous répondrons bientôt.");
+    
+    if (!isValidPhone(formData.phone)) {
+      setSnackbarMessage("Format du numéro de téléphone invalide");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true);
+      return;
+    }
+
+    setStatus({ loading: true, error: null, success: false });
+
+    try {
+      await emailjs.send(
+        'service_zimdd1b',
+        'template_bq2uzar',
+        {
+          from_name: formData.name || "",
+          from_email: formData.email || "",
+          subject: formData.subject || "",
+          message: formData.message || "",
+          phone: formData.phone || "",
+          date: new Date().toLocaleString('fr-FR', {
+            dateStyle: 'full',
+            timeStyle: 'short'
+          })
+        },
+        'SLg2UipHeSFDgf8MD'
+      );
+      
+      setStatus({ loading: false, error: null, success: true });
+      setFormData({ 
+        name: "", 
+        email: "", 
+        phone: "",
+        subject: "", 
+        message: "" 
+      });
+      
+      setSnackbarMessage("Message envoyé avec succès !");
       setSnackbarSeverity("success");
-    } else {
-      setSnackbarMessage("Veuillez écrire un message plus détaillé (au moins 10 mots).");
+    } catch (error) {
+      console.error("Erreur:", error);
+      setStatus({ 
+        loading: false, 
+        error: "Erreur lors de l'envoi du message", 
+        success: false 
+      });
+      setSnackbarMessage("Erreur lors de l'envoi du message");
       setSnackbarSeverity("error");
     }
     setOpenSnackbar(true);
@@ -84,7 +143,7 @@ const Contact = () => {
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
+        transition: { delay: 0.2, duration: 0.4 }
       }}
       className="py-6"
     >
@@ -96,17 +155,27 @@ const Contact = () => {
             <h3 className="text-4xl text-accent">Travaillons ensemble</h3>
               <p className="text-white/60">
                 Veuillez me contacter pour tous vos projets web, que ce soit du front-end ou du back-end. <br />
-                Je suis à votre disposition en tant que développeur web fullstack.
+                Je suis à votre disposition en tant que développeur web fullstack junior
               </p>
               {/* input */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <Input type="text" placeholder="Prénom" validate={(value) => validateInput('text', value)} required />
-                <Input type="text" placeholder="Nom" validate={(value) => validateInput('text', value)} required />
-                <Input type="email" placeholder="Adresse email" validate={(value) => validateInput('email', value)} required />
-                <Input type="tel" placeholder="Numéro de téléphone" validate={(value) => validateInput('phone', value)} required />
+                <Input type="text" placeholder="Prénom" name="name" value={formData.name} onChange={handleChange} required />
+                <Input type="email" placeholder="Adresse email" name="email" value={formData.email} onChange={handleChange} required />
+                <Input 
+                  type="tel" 
+                  placeholder="Numéro de téléphone" 
+                  name="phone" 
+                  value={formData.phone} 
+                  onChange={handleChange}
+                  pattern="^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$"
+                  required 
+                />
               </div>
               {/* select */}
-              <Select required>
+              <Select 
+                onValueChange={(value) => setFormData(prev => ({ ...prev, subject: value }))}
+                value={formData.subject}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Sélectionnez un service" />
                 </SelectTrigger>
@@ -121,14 +190,16 @@ const Contact = () => {
               </Select>
               {/* textarea */}
               <Textarea
-                className="h-[200px]"
-                placeholder="Tapez votre message ici (au moins 10 mots)."
-                required
+                className="h-[200px] "
+                placeholder="Tapez votre message ici (au moins 5 mots)."
                 name="message"
+                value={formData.message}
+                onChange={handleChange}
+                required
               />
               {/* btn */}
-              <Button type="submit" size="md" className="max-w-40">
-                Envoyer le message
+              <Button type="submit" size="md" className="max-w-50" disabled={status.loading}>
+                {status.loading ? "Envoi en cours..." : "Envoyer le message"}
               </Button>
             </form>
           </div>
@@ -159,6 +230,7 @@ const Contact = () => {
       </Snackbar>
     </motion.section>
   );
-};
+}
 
-export default Contact;
+// Export le composant sans SSR
+export default ContactForm;

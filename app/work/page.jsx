@@ -62,6 +62,27 @@ const projets = [
     image: "/assets/Capture d’écran 2024-08-27 à 18.06.55.png",
     github: "https://github.com/jlaron230/ProjetX",
   },
+  {
+    num: "05",
+    categorie: "fullstack",
+    titre: "projet 5",
+    description:
+      "Projet de fin d'année",
+    technologies: [{ nom: "React.JS" }, { nom: "Tailwind.css" },{ nom: "CSS" }, { nom: "Node.js" }, { nom: "ExpressJS" }],
+    image: "/assets/Capture d’écran 2025-02-03 à 16.31.58.png",
+    lienDirect: "https://vinrix-2.onrender.com/",
+    github: "https://github.com/Mat13b/Vinrix-2",
+  },
+  {
+    num: "06",
+    categorie: "backend",
+    titre: "projet 6",
+    description:
+      "Projet de démonstration API REST",
+    technologies: [{ nom: "Next.js" }, { nom: "Talwind CSS" }, { nom: "Typescript" },],
+    image: "/assets/Capture d’écran 2025-02-03 à 16.27.19.png",
+    github: "https://github.com/Mat13b/dizer",
+  },
 ];
 
 const Travail = () => {

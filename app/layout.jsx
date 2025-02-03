@@ -7,7 +7,6 @@ import "./globals.css";
 
 // composants
 import Header from "@/components/Header";
-import PageTransition from "@/components/PageTransition";
 import StairTransition from "@/components/StairTransition";
 
 const jetbrainsMono = JetBrains_Mono({
@@ -78,15 +77,22 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body className={jetbrainsMono.variable}>
-        <canvas ref={canvasRef} />
-        <Header />
-        <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <canvas 
+          ref={canvasRef} 
+          className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+        />
+        <div className="relative z-10">
+          <Header />
+          <main className="relative z-20">
+            <StairTransition>
+              {children}
+            </StairTransition>
+          </main>
+        </div>
       </body>
     </html>
   );
 }
-
 function computeGeometry() {
   const space = 4, nb = 80, amp = 0.08, fre = 0.8, pi2 = Math.PI * 2;
   const geometry = new THREE.BufferGeometry();
@@ -142,3 +148,4 @@ function animeGeometry(geometry, progress) {
   geometry.attributes.position.needsUpdate = true;
   geometry.attributes.color.needsUpdate = true;
 }
+

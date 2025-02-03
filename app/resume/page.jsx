@@ -19,7 +19,7 @@ import { SiTailwindcss, SiNextdotjs } from "react-icons/si";
 const aProposDeMoi = {
   title: "À propos de moi",
   description:
-    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
+    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies",
   info: [
     {
       fieldName: "Nom",
@@ -53,17 +53,22 @@ const experience = {
   icon: "/assets/resume/badge.svg",
   title: "Mon expérience",
   description:
-    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies <br> Je suis actuellement en recherche d'emploi",
+    "Développeur web fullstack junior, je suis passionné par le développement web et les nouvelles technologies",
   items: [
     {
-      company: "Simplon",
+      company: "AGGEGO-TECH",
       position: "Développeur web fullstack junior",
-      duration: "2023 - aujourd'hui",
+      duration: "2024 - 2025",
+    },
+    {
+      company: "Simplon",
+      position: "Développeur web et web mobile ",
+      duration: "2023 - 2024",
     },
     {
       company: "Simplon",
       position: "Création de maquette graphique",
-      duration: "2023 - aujourd'hui",
+      duration: "2023 - 2024",
     },
     {
       company: "Move Expert",
@@ -176,7 +181,7 @@ function ResumeContent() {
       <div className="container mx-auto">
         <Tabs
           defaultValue="experience"
-          className="flex flex-col xl:flex-row gap-[60px]"
+          className="flex flex-col xl:flex-row gap-[65px]"
         >
           <TabsList className="flex flex-col w-full max-w-[380px] mx-auto xl:mx-0 gap-6">
             <TabsTrigger value="experience">Expérience</TabsTrigger>
@@ -200,17 +205,17 @@ function ResumeContent() {
                       return (
                         <li
                           key={index}
-                          className="bg-[#232329] h-[184px] py-6 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
+                          className="bg-[#232329] h-[184px] py-8 px-10 rounded-xl flex flex-col justify-center items-center lg:items-start gap-1"
                         >
                           <span className="text-accent">{item.duration}</span>
                           <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
                             {item.position}
                           </h3>
-                          <div className="flex items-center gap-3">
+                          {/* <div className="flex items-center gap-3"> */}
                             {/* dot */}
                             <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
-                            <p className="text-white/60">{item.company}</p>
-                          </div>
+                            <p className="text-white/60 mt-6">{item.company}</p>
+                          {/* </div> */}
                         </li>
                       );
                     })}
@@ -238,11 +243,11 @@ function ResumeContent() {
                           <h3 className="text-xl max-w-[260px] min-h-[60px] text-center lg:text-left">
                             {item.degree}
                           </h3>
-                          <div className="flex items-center gap-3">
+                         
                             {/* dot */}
                             <span className="w-[6px] h-[6px] rounded-full bg-accent"></span>
-                            <p className="text-white/60">{item.institution}</p>
-                          </div>
+                            <p className="text-white/60 mt-6">{item.institution}</p>
+                        
                         </li>
                       );
                     })}
@@ -300,7 +305,7 @@ function ResumeContent() {
                         key={index}
                         className="flex items-center justify-center gap-4 xl:justify-start"
                       >
-                        <span className="text-white/60">{item.fieldName}</span>
+                        <span className="text-white/60 gap-3">{item.fieldName}</span>
                         <span className="text-xl">{item.fieldValue}</span>
                       </li>
                     );

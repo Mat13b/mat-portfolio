@@ -25,13 +25,6 @@ const services = [
       "Realisation de logo pour les entreprises et les particuliers",
     href: "",
   },
-  {
-    num: "04",
-    title: "SEO",
-    description:
-      "Optimisation de votre site web pour les moteurs de recherche",
-    href: "",
-  },
 ];
 
 import { motion } from "framer-motion";
