@@ -23,7 +23,7 @@ import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 // Initialisez EmailJS (à mettre dans votre composant)
-emailjs.init("SLg2UipHeSFDgf8MD");
+emailjs.init(process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY);
 
 const info = [
   {
@@ -91,8 +91,8 @@ function Contact() {
 
     try {
       await emailjs.send(
-        'service_zimdd1b',
-        'template_bq2uzar',
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE,
         {
           from_name: formData.name || "",
           from_email: formData.email || "",
@@ -104,7 +104,7 @@ function Contact() {
             timeStyle: 'short'
           })
         },
-        'SLg2UipHeSFDgf8MD'
+        process.env.NEXT_PUBLIC_EMAILJS_KEY
       );
       
       setStatus({ loading: false, error: null, success: true });
