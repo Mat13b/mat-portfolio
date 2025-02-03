@@ -1,16 +1,10 @@
 import Social from "@/components/Social";
 import Photo from "@/components/Photo";
-import DynamicComponentWrapper from "@/components/DynamicComponentWrapper";
-import dynamic from 'next/dynamic';
-
-const StairTransition = dynamic(() => import('../components/StairTransition'), {
-  ssr: true
-});
+import StairTransition from "@/components/StairTransition";
 
 export default function Home() {
   return (
     <main>
-     
       <StairTransition>
         <section className="h-full">
           <div className="container h-full mx-auto">
@@ -34,7 +28,6 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <DynamicComponentWrapper />
       </StairTransition>
     </main>
   );

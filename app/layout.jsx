@@ -1,13 +1,11 @@
-'use client';
+"use client";
 
-import { useEffect, useRef, useMemo } from "react";
 import { JetBrains_Mono } from "next/font/google";
-import * as THREE from "three";
 import "./globals.css";
-
-// composants
 import Header from "@/components/Header";
 import StairTransition from "@/components/StairTransition";
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -18,46 +16,48 @@ const jetbrainsMono = JetBrains_Mono({
 export default function RootLayout({ children }) {
   const canvasRef = useRef(null);
 
-  const { scene, camera, geometry, material, light } = useMemo(() => {
-    const scene = new THREE.Scene();
-    let camera;
-    if (typeof window !== 'undefined') {
-      camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight);
-      camera.position.set(0, 1, 2);
-      camera.lookAt(0, -0.5, 0);
-    }
-    const geometry = computeGeometry();
-    const material = new THREE.PointsMaterial({ size: 0.015, vertexColors: true });
-    const light = new THREE.PointLight(0xffffff, 2.5, 100);
-    light.position.set(0, 10, 10);
-    
-    return { scene, camera, geometry, material, light };
-  }, []);
-
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    if (!canvasRef.current) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.current,
+      alpha: true,
+    });
+
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-    const mesh = new THREE.Points(geometry, material);
-    scene.add(mesh);
-    scene.add(light);
+    const geometry = new THREE.BufferGeometry();
+    const count = 5000;
+    const positions = new Float32Array(count * 3);
+    const colors = new Float32Array(count * 3);
 
-    const clock = new THREE.Clock();
-    let animationFrameId;
+    for (let i = 0; i < count * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 10;
+      positions[i + 1] = (Math.random() - 0.5) * 10;
+      positions[i + 2] = (Math.random() - 0.5) * 10;
 
-    const loop = () => {
-      const t = clock.getElapsedTime();
-      animeGeometry(geometry, t);
-      mesh.rotation.y = 0.05 * t;
-      light.position.x = Math.sin(t) * 3;
-      light.position.z = Math.cos(t) * 3;
-      renderer.render(scene, camera);
-      animationFrameId = requestAnimationFrame(loop);
-    };
+      colors[i] = 0;
+      colors[i + 1] = 1;  // Vert
+      colors[i + 2] = 0.5;
+    }
 
-    loop();
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+    const material = new THREE.PointsMaterial({
+      size: 0.02,
+      vertexColors: true,
+      transparent: true,
+      opacity: 0.8,
+    });
+
+    const points = new THREE.Points(geometry, material);
+    scene.add(points);
+
+    camera.position.z = 3;
 
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -67,12 +67,21 @@ export default function RootLayout({ children }) {
 
     window.addEventListener('resize', handleResize);
 
+    const animate = () => {
+      requestAnimationFrame(animate);
+      points.rotation.y += 0.001;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
     return () => {
-      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
+      geometry.dispose();
+      material.dispose();
       renderer.dispose();
     };
-  }, [scene, camera, geometry, material, light]);
+  }, []);
 
   return (
     <html lang="fr">
