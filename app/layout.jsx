@@ -100,22 +100,23 @@ export default function RootLayout({ children }) {
   }, []);
 
   return (
-    <html lang="fr">
-      <body className={jetbrainsMono.variable}>
-        <canvas 
-          ref={canvasRef} 
-          className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
-        />
-        <div className="relative z-10">
-          <Header />
-          <main className="relative z-20">
-            <StairTransition>
-              {children}
-            </StairTransition>
-          </main>
-        </div>
-      </body>
-    </html>
+      <html lang="fr">
+        <body className={jetbrainsMono.variable}>
+          <canvas 
+            ref={canvasRef} 
+            className="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none"
+          />
+          <div className="relative z-10">
+            <Header />
+            <main className="relative z-20">
+              <StairTransition>
+                {children}
+              </StairTransition>
+            </main>
+          </div>
+        </body>
+      </html>
+   
   );
 }
 
