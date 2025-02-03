@@ -24,10 +24,10 @@ const Photo = () => {
         >
           <Image
             src="/assets/IMG_0613_2.jpg"
-            alt="Description de l'image"
-            width={100}  // Ajustez selon vos besoins
-            height={100} // Ajustez selon vos besoins
-            layout="responsive"
+            width={500}  // Spécifiez la largeur appropriée
+            height={300} // Spécifiez la hauteur appropriée
+            alt="Description"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-contain rounded-full"
             loading="lazy"
           />
